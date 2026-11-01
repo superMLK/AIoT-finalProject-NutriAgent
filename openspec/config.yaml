@@ -1,0 +1,15 @@
+schema_version: "1.0"
+project:
+  name: "NutriAgent"
+  description: "結合物聯網感測與健檢知識圖譜之即時適應性外食營養決策代理人"
+  version: "1.0.0"
+context:
+  domain: "Clinical Nutrition, Consumer IoT Telemetry, Deep Reinforcement Learning"
+  standards:
+    - "RFC 2119 Key Words for Requirement Levels"
+    - "AHA DASH Dietary Guidelines (Sodium < 700mg/meal)"
+    - "ADA 2024 Standards of Care in Diabetes (Low-GI & Carbohydrate Counting)"
+    - "Taiwan FDA Food Composition Database 2024"
+workflows:
+  spec_driven: true
+  scenarios_format: "GIVEN-WHEN-THEN"

@@ -1,0 +1,15 @@
+change_id: "proposal-nutriagent-v1"
+title: "NutriAgent: Real-Time Adaptive Dietary Decision Agent"
+status: "in-progress"
+created_at: "2026-11-01"
+author: "Student Developer"
+scope:
+  in_scope:
+    - "Dynamic energy expenditure calculation from Google Fit wearable telemetry"
+    - "Clinical health checkup parsing and medical nutrition therapy (MNT) hard constraint filtering"
+    - "Deep Reinforcement Learning (PyTorch DQN) flavor preference ranking and online update"
+    - "Location-based service (LBS) spatial menu retrieval around physical radius"
+    - "Interactive demonstration web cockpit (Flask) and automated test suite"
+  out_of_scope:
+    - "Direct integration with clinical Electronic Health Record (EHR) hospital databases"
+    - "Invasive continuous glucose monitor (CGM) Bluetooth pairing"
