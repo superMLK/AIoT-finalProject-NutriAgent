@@ -1,0 +1,41 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.env
+.venv
+venv/
+ENV/
+.idea/
+.vscode/
+
+# macOS / Office temp files
+.DS_Store
+~$*.docx
+~$*.pptx
+
+# Local tool settings (personal permissions)
+.claude/settings.local.json
+
+# Working prompt for slide generation (not part of the project deliverable)
+proposal_assets/PPT_PROMPT.md
+
+# Logs
+*.log

@@ -1,0 +1,122 @@
+[
+  {
+    "profile_id": "P_001_HYPERTENSION",
+    "name": "陳建宏 (45歲 科技業專案經理)",
+    "description": "長期外食，常有應酬，健檢發現血壓顯著偏高，屬於第一期高血壓，伴隨輕度高血脂。海鮮類過敏體質。",
+    "age": 45,
+    "gender": "male",
+    "height_cm": 175,
+    "weight_kg": 82,
+    "allergens": ["seafood"],
+    "metrics": {
+      "blood_pressure_systolic": 145,
+      "blood_pressure_diastolic": 94,
+      "fasting_glucose_mg_dl": 96,
+      "total_cholesterol_mg_dl": 218,
+      "ldl_c_mg_dl": 142,
+      "uric_acid_mg_dl": 6.1,
+      "bmi": 26.8
+    },
+    "clinical_conditions": ["Hypertension_Stage1", "Hyperlipidemia_Borderline"],
+    "dietary_hard_constraints": {
+      "max_meal_sodium_mg": 700,
+      "prohibit_deep_fried": true,
+      "max_saturated_fat_g": 5.0
+    }
+  },
+  {
+    "profile_id": "P_002_PRE_DIABETES",
+    "name": "林雅婷 (36歲 行銷總監)",
+    "description": "健檢報告空腹血糖偏高（糖尿病前期），體態微胖，經常午後嗜睡，需要嚴格控制精緻糖與高升糖碳水。對奶製品敏感過敏。",
+    "age": 36,
+    "gender": "female",
+    "height_cm": 162,
+    "weight_kg": 67,
+    "allergens": ["dairy"],
+    "metrics": {
+      "blood_pressure_systolic": 118,
+      "blood_pressure_diastolic": 76,
+      "fasting_glucose_mg_dl": 115,
+      "total_cholesterol_mg_dl": 185,
+      "ldl_c_mg_dl": 110,
+      "uric_acid_mg_dl": 4.8,
+      "bmi": 25.5
+    },
+    "clinical_conditions": ["Pre_Diabetes", "Insulin_Resistance"],
+    "dietary_hard_constraints": {
+      "prohibit_high_gi": true,
+      "max_added_sugar_g": 5.0,
+      "min_fiber_per_meal_g": 5.0
+    }
+  },
+  {
+    "profile_id": "P_003_GOUT_HYPERURICEMIA",
+    "name": "張偉銘 (29歲 軟體工程師)",
+    "description": "去年曾有一次急性痛風發作痛徹心扉，健檢尿酸值達 8.4 mg/dL，嚴格限制高普林海鮮濃湯與長時間燉肉湯。有花生堅果過敏史。",
+    "age": 29,
+    "gender": "male",
+    "height_cm": 178,
+    "weight_kg": 74,
+    "allergens": ["peanuts"],
+    "metrics": {
+      "blood_pressure_systolic": 122,
+      "blood_pressure_diastolic": 80,
+      "fasting_glucose_mg_dl": 92,
+      "total_cholesterol_mg_dl": 175,
+      "ldl_c_mg_dl": 105,
+      "uric_acid_mg_dl": 8.4,
+      "bmi": 23.4
+    },
+    "clinical_conditions": ["Hyperuricemia", "Gout_History"],
+    "dietary_hard_constraints": {
+      "prohibit_high_purine": true,
+      "prohibit_alcohol": true,
+      "prohibit_organ_meats": true
+    }
+  },
+  {
+    "profile_id": "P_004_FITNESS_ATHLETE",
+    "name": "黃冠宇 (23歲 大學體育社團學生)",
+    "description": "每週重量訓練與慢跑 4 次，今日活動量大，目標是增肌減脂，需要高蛋白與充足的優質複合碳水補充儲存肌醣原。無食物過敏。",
+    "age": 23,
+    "gender": "male",
+    "height_cm": 180,
+    "weight_kg": 76,
+    "allergens": [],
+    "metrics": {
+      "blood_pressure_systolic": 112,
+      "blood_pressure_diastolic": 72,
+      "fasting_glucose_mg_dl": 88,
+      "total_cholesterol_mg_dl": 160,
+      "ldl_c_mg_dl": 90,
+      "uric_acid_mg_dl": 5.4,
+      "bmi": 23.5
+    },
+    "clinical_conditions": ["Athletic_Hyperactive"],
+    "dietary_hard_constraints": {
+      "min_protein_g": 30.0,
+      "target_macro_ratio": "40C_35P_25F"
+    }
+  },
+  {
+    "profile_id": "P_005_HEALTHY_SEDENTARY",
+    "name": "周思妤 (21歲 大學生)",
+    "description": "健康無慢性病，但期末考週全天在圖書館久坐，運動步數極少，需要維持清爽無負擔之低熱量高纖維輕食。對小麥麩質過敏。",
+    "age": 21,
+    "gender": "female",
+    "height_cm": 160,
+    "weight_kg": 51,
+    "allergens": ["gluten"],
+    "metrics": {
+      "blood_pressure_systolic": 110,
+      "blood_pressure_diastolic": 70,
+      "fasting_glucose_mg_dl": 85,
+      "total_cholesterol_mg_dl": 168,
+      "ldl_c_mg_dl": 92,
+      "uric_acid_mg_dl": 4.2,
+      "bmi": 19.9
+    },
+    "clinical_conditions": ["Healthy_Normal"],
+    "dietary_hard_constraints": {}
+  }
+]
