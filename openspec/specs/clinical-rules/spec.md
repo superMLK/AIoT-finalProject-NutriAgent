@@ -2,7 +2,7 @@
 Capability Path: `openspec/specs/clinical-rules/spec.md`
 
 ## Overview
-Enforces deterministic clinical constraint gating to prune meals that violate user health checkup red flags before recommendation scoring.
+Enforces deterministic clinical constraint gating to prune meals that violate user health checkup red flags and declared food allergens before recommendation scoring.
 
 ---
 
@@ -33,10 +33,26 @@ The system SHALL evaluate candidate meals against user clinical checkup metrics 
 
 ---
 
+### Requirement: Food Allergen Gating
+The system SHALL accept user-declared food allergens and SHALL strictly reject any candidate meal containing one or more of the specified allergens.
+
+#### Scenario: Seafood Allergy Isolation
+- **GIVEN** a user health profile with declared allergen `"seafood"`
+- **WHEN** candidate meals are evaluated
+- **THEN** any meal containing `"seafood"`, `"fish"`, or `"shellfish"` in its `allergens` list SHALL be rejected
+- **AND** the rejection explanation SHALL state that the meal contains the allergen
+
+#### Scenario: Peanuts and Tree Nuts Allergy Isolation
+- **GIVEN** a user profile with declared allergen `"peanuts"`
+- **WHEN** candidate meals are evaluated
+- **THEN** any meal with `"peanuts"` or `"nuts"` in its `allergens` list SHALL be rejected
+
+---
+
 ### Requirement: Zero Clinical Violation Rate (CVR)
-The system SHALL maintain a Clinical Violation Rate (CVR) of exactly $0.0\%$ in all final recommendations.
+The system SHALL maintain a Clinical Violation Rate (CVR) of exactly $0.0\%$ in all final recommendations, encompassing both medical conditions and declared food allergens.
 
 #### Scenario: Verification of zero violation across patient cohorts
-- **GIVEN** synthetic test profiles across hypertension, pre-diabetes, and gout
+- **GIVEN** synthetic test profiles across hypertension, pre-diabetes, gout, and allergen constraints
 - **WHEN** recommendations are produced by the agent
-- **THEN** none of the recommended Top-3 meals SHALL violate the user's clinical conditions
+- **THEN** none of the recommended Top-3 meals SHALL violate the user's clinical conditions or allergen declarations

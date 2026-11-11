@@ -25,3 +25,17 @@ venv/
 ENV/
 .idea/
 .vscode/
+
+# macOS / Office temp files
+.DS_Store
+~$*.docx
+~$*.pptx
+
+# Local tool settings (personal permissions)
+.claude/settings.local.json
+
+# Working prompt for slide generation (not part of the project deliverable)
+proposal_assets/PPT_PROMPT.md
+
+# Logs
+*.log

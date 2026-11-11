@@ -7,7 +7,11 @@ and candidate meal filtering within designated physical radius.
 
 import math
 import json
-from typing import List, Dict, Any, Tuple
+from pathlib import Path
+from typing import List, Dict, Any, Tuple, Optional
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DEFAULT_CATALOG_PATH = BASE_DIR / "data" / "meal_catalog.json"
 
 class SpatialLBSEngine:
     """
@@ -22,8 +26,9 @@ class SpatialLBSEngine:
         "xinyi_center": {"name": "信義商圈 (Xinyi Commercial Center)", "lat": 25.0350, "lon": 121.5645}
     }
 
-    def __init__(self, catalog_path: str = "data/meal_catalog.json"):
-        with open(catalog_path, "r", encoding="utf-8") as f:
+    def __init__(self, catalog_path: Optional[str] = None):
+        target_path = Path(catalog_path) if catalog_path else DEFAULT_CATALOG_PATH
+        with open(target_path, "r", encoding="utf-8") as f:
             self.catalog = json.load(f)
 
     @staticmethod

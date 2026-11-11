@@ -1,0 +1,14 @@
+change_id: "gemini-chat-agent-v2"
+title: "同步新版 Proposal 規範、改用 Gemini API 取代深度神經網路並升級 ChatGPT 對話式 Agent UI"
+status: "completed"
+created_at: "2026-11-11"
+author: "AI Agent & Developer"
+scope:
+  in_scope:
+    - "Sync codebase with updated NutriAgent_Proposal.docx (Mifflin-St Jeor BMR, 0.65 damping, 900 kcal meal cap, IoT plausibility check, never-relax clinical gate when safe pool is empty, TFDA 11 allergen taxonomy, numerical consistency check)"
+    - "Replace PyTorch DQN neural network in src/recommender.py with Gemini API contextual preference & conversational reasoning engine (with offline grounded fallback)"
+    - "Extend src/agent.py with multi-turn conversational chat() interface, NLU intent extraction, tool execution trace, and grounded clinical response synthesis"
+    - "Redesign app.py into a ChatGPT-style conversational AI Agent web interface with sidebar context controls, API key setup, reasoning trace, and interactive meal cards"
+    - "Update AGENTS.md, HANDOVER.md, README.md, PROPOSAL.md, DESIGN.md, requirements.txt, and tests/test_agent.py"
+  out_of_scope:
+    - "Native mobile iOS/Android app wrapper"

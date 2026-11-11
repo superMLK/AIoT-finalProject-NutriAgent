@@ -1,0 +1,14 @@
+change_id: "add-allergen-filtering"
+title: "新增過敏食物輸入與嚴格過濾功能 (Food Allergen Input & Hard Constraint Filtering)"
+status: "in-progress"
+created_at: "2026-11-03"
+author: "Student Developer"
+scope:
+  in_scope:
+    - "User health checkup profile schema enhancement with declared allergens list"
+    - "Food catalog augmentation with standardized allergen tags (seafood, fish, shellfish, peanuts, gluten, egg, dairy, soy, sesame)"
+    - "Deterministic clinical hard-constraint pruning for allergen violations (CVR = 0.0%)"
+    - "Interactive Web Cockpit multi-select food allergen input checkboxes & real-time API parameter passing"
+    - "Automated unit test coverage verifying zero allergen violations"
+  out_of_scope:
+    - "Trace contamination / shared kitchen facility cross-contact prediction"

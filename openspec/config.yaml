@@ -1,15 +1,16 @@
 schema_version: "1.0"
 project:
   name: "NutriAgent"
-  description: "結合物聯網感測與健檢知識圖譜之即時適應性外食營養決策代理人"
-  version: "1.0.0"
+  description: "結合穿戴式 IoT、臨床營養規則與 Google Gemini API 之即時外食對談決策代理人"
+  version: "2.0.0"
 context:
-  domain: "Clinical Nutrition, Consumer IoT Telemetry, Deep Reinforcement Learning"
+  domain: "Clinical Nutrition (MNT), Wearable IoT Telemetry, Google Gemini Conversational AI & Contextual Bandits"
   standards:
     - "RFC 2119 Key Words for Requirement Levels"
-    - "AHA DASH Dietary Guidelines (Sodium < 700mg/meal)"
-    - "ADA 2024 Standards of Care in Diabetes (Low-GI & Carbohydrate Counting)"
-    - "Taiwan FDA Food Composition Database 2024"
+    - "2025 AHA/ACC Hypertension & DASH Dietary Guidelines (Sodium <= 700mg/meal)"
+    - "ADA 2026 Standards of Care in Diabetes (Low-GI & Added Sugar <= 5g)"
+    - "2020 ACR Gout Management Guideline (Low/Medium Purine)"
+    - "Taiwan FDA (TFDA) 11 Mandatory Food Allergen Categories"
 workflows:
   spec_driven: true
   scenarios_format: "GIVEN-WHEN-THEN"

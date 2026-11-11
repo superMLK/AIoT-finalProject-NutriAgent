@@ -20,6 +20,7 @@
     "is_deep_fried": false,
     "price_twd": 99,
     "flavor_profile": "light_herb",
+    "allergens": ["gluten", "soy"],
     "tags": ["低鈉", "低GI", "非油炸", "高纖", "DASH友善"]
   },
   {
@@ -43,6 +44,7 @@
     "is_deep_fried": true,
     "price_twd": 109,
     "flavor_profile": "savory_heavy",
+    "allergens": ["gluten", "soy", "egg"],
     "tags": ["高熱量", "高鈉", "油炸", "高飽和脂肪"]
   },
   {
@@ -66,6 +68,7 @@
     "is_deep_fried": false,
     "price_twd": 89,
     "flavor_profile": "spicy_clean",
+    "allergens": ["soy"],
     "tags": ["高蛋白", "低脂", "低GI", "運動後補充"]
   },
   {
@@ -89,6 +92,7 @@
     "is_deep_fried": false,
     "price_twd": 95,
     "flavor_profile": "light_savory",
+    "allergens": ["gluten", "soy"],
     "tags": ["低GI", "低鈉", "高蛋白", "全穀雜糧", "得舒DASH"]
   },
   {
@@ -112,6 +116,7 @@
     "is_deep_fried": false,
     "price_twd": 99,
     "flavor_profile": "savory_heavy",
+    "allergens": ["gluten", "soy"],
     "tags": ["高鈉", "高升糖", "濃稠勾芡"]
   },
   {
@@ -135,6 +140,7 @@
     "is_deep_fried": false,
     "price_twd": 120,
     "flavor_profile": "traditional_savory",
+    "allergens": ["gluten", "soy"],
     "tags": ["高蛋白", "非油炸", "飽足感佳", "控鈉合規"]
   },
   {
@@ -158,6 +164,7 @@
     "is_deep_fried": true,
     "price_twd": 130,
     "flavor_profile": "savory_heavy",
+    "allergens": ["gluten", "soy", "egg"],
     "tags": ["油炸", "極高鈉", "高飽和脂肪"]
   },
   {
@@ -181,6 +188,7 @@
     "is_deep_fried": false,
     "price_twd": 135,
     "flavor_profile": "fresh_crisp",
+    "allergens": ["gluten", "soy"],
     "tags": ["高纖", "低脂", "全穀全麥", "DASH首選"]
   },
   {
@@ -204,6 +212,7 @@
     "is_deep_fried": false,
     "price_twd": 115,
     "flavor_profile": "japanese_sweet_savory",
+    "allergens": ["gluten", "soy"],
     "tags": ["牛肉", "溫熱定食", "鈉含量稍高需留意"]
   },
   {
@@ -227,6 +236,7 @@
     "is_deep_fried": false,
     "price_twd": 220,
     "flavor_profile": "savory_heavy",
+    "allergens": ["gluten", "soy", "sesame"],
     "tags": ["高普林", "極高鈉", "超高脂肪", "痛風與高血壓嚴禁"]
   },
   {
@@ -250,7 +260,8 @@
     "is_deep_fried": false,
     "price_twd": 125,
     "flavor_profile": "clean_protein",
-    "tags": ["超低鈉", "低脂", "高蛋白質", "低GI", "三高首選"]
+    "allergens": [],
+    "tags": ["超低鈉", "低脂", "高蛋白質", "低GI", "三高首選", "無過敏原"]
   },
   {
     "meal_id": "FIT_002",
@@ -273,6 +284,7 @@
     "is_deep_fried": false,
     "price_twd": 135,
     "flavor_profile": "clean_protein",
+    "allergens": ["seafood", "fish"],
     "tags": ["低脂魚肉", "超低鈉", "DASH", "痛風安全"]
   },
   {
@@ -296,6 +308,31 @@
     "is_deep_fried": false,
     "price_twd": 140,
     "flavor_profile": "seafood_rich",
+    "allergens": ["seafood", "fish", "shellfish"],
     "tags": ["極高普林", "高鈉", "高鮮濃湯", "痛風患者高危險"]
+  },
+  {
+    "meal_id": "NOO_001",
+    "store_name": "老張手作麵館 公館店",
+    "store_category": "傳統麵食",
+    "dish_name": "經典招牌特濃麻醬花生乾拌麵",
+    "cuisine_type": "中式乾麵",
+    "coordinates": {"lat": 25.0145, "lon": 121.5348},
+    "calories_kcal": 650,
+    "protein_g": 18.0,
+    "fat_g": 32.0,
+    "saturated_fat_g": 6.8,
+    "carbohydrates_g": 74.0,
+    "dietary_fiber_g": 3.0,
+    "sodium_mg": 920,
+    "added_sugar_g": 4.0,
+    "glycemic_index": "High",
+    "purine_level": "Medium",
+    "cooking_method": "水煮淋醬",
+    "is_deep_fried": false,
+    "price_twd": 85,
+    "flavor_profile": "savory_heavy",
+    "allergens": ["peanuts", "sesame", "gluten", "soy"],
+    "tags": ["花生濃醬", "花生堅果過敏嚴禁"]
   }
 ]

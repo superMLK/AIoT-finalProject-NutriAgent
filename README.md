@@ -1,137 +1,55 @@
-# NutriAgent 智動食健
-## 結合物聯網感測與健檢知識圖譜之即時適應性外食營養決策代理人
-### Real-Time Adaptive Dietary Decision Agent Integrating Wearable IoT Telemetry and Clinical Knowledge Graph
+# NutriAgent 智動食健 (v2.0)
+## 結合穿戴式 IoT、臨床營養硬規則與 Google Gemini API 之即時外食對談決策代理人
+### A Real-Time Conversational Dietary Decision Agent Integrating Wearable IoT Telemetry, Clinical Nutrition Rules, and Google Gemini API
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-red.svg)](https://pytorch.org/)
+[![Gemini API](https://img.shields.io/badge/Google%20Gemini-2.5%20Flash-4285F4.svg)](https://ai.google.dev/)
 [![Flask](https://img.shields.io/badge/Flask-3.0%2B-green.svg)](https://flask.palletsprojects.com/)
-[![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Proposal-100%25%20Complete-brightgreen.svg)]()
+[![OpenSpec](https://img.shields.io/badge/OpenSpec-v1.0%20Compliant-brightgreen.svg)]()
 
-> **課程專題**：國立大學「物聯網應用與資料分析 (IoT Applications & Data Analysis)」期末專案  
-> **核心架構**：`AI Agent + Domain Knowledge + Data Analytics + Real-World Application`  
-> **交接標準**：*即使原開發者不在，下一位開發者仍能透過 GitHub + README.md + DESIGN.md 理解、執行、驗證並繼續開發此專題。*
-
----
-
-## 📌 專案核心故事 (Abstract Story)
-
-* **[Attention Getter — 動機]**：台灣成人代謝症候群盛行率高達 **34.6%**，超過 **72.8%** 的上班族與學生依賴外食。高鈉、高精緻澱粉、隱性脂肪過剩之外食環境成為誘發心血管與糖尿病元兇。智慧手錶普及率已突破 45%，物聯網生理監測數據已具備成熟基礎。
-* **[But — 既有挑戰]**：MyFitnessPal 等記帳 App 繁瑣且流失率超 80%；通用 LLM (ChatGPT) 存在「營養學數值幻覺」且無即時穿戴物聯網串聯；外送地圖演算法以商業利潤推銷油炸高熱量食品，脫鉤用戶健檢紅字（高血壓禁高鈉、高尿酸避普林）。
-* **[Cure — 本專案解決方案]**：提出 **NutriAgent**，一個結合臨床營養學專家思維的 **Domain AI Agent**。串聯 Google Fit 物聯網生理串流、解析健檢紅字硬邊界、檢索周邊實體外食菜單，並運用 **PyTorch 深度強化學習 (DRL)** 演進個人口味偏好。
-* **[Development — 核心技術]**：
-  1. **Google Fit REST API / 代謝流管線**：以分鐘級計算動態總能量消耗 (Dynamic TDEE)。
-  2. **臨床醫學硬約束閘門 (Clinical Constraint Gate)**：嚴格執行 AHA/ADA/得舒(DASH) 營養醫學規則，確保違規率 0%。
-  3. **PyTorch Deep Q-Network (DQN) 策略網路**：即時在線學習 (Online Learning)，平衡探索與口味適配。
-  4. **地理空間 LBS 檢索**：索引台灣四大超商與連鎖便當店 500+ 餐點全營養成分。
-* **[Experiments & Findings — 預期成效]**：在 5 組典型臨床表型下，達成 **100% 杜絕健檢禁忌餐點 (Zero Clinical Violation Rate)**，單餐熱量偏差控制在 $\pm 5\%$ 以內，並於 5 次互動內自適應口味偏好轉變。
+> **課程專題**：「物聯網應用與資料分析 (IoT Applications & Data Analysis)」期末專題  
+> **核心範式**：`AI Agent + Domain Knowledge + Data Analytics + Real-World Application`  
+> **AI Agent 交接支援**：本儲存庫遵循 **OpenSpec** 規格驅動開發，任何人類開發者或 AI Coding Agent 皆可透過 [`AGENTS.md`](AGENTS.md) 與 [`HANDOVER.md`](HANDOVER.md) 無縫接手。
 
 ---
 
-## 🏗️ 系統架構圖 (System Architecture)
+## 📌 專題核心架構與創新 (Key Innovations)
 
-```
-① 使用者情境 (外食時段、飢餓、商圈位置)
-        ↓
-② 多源輸入 (Google Fit 步數/熱量、健檢報告指標、GPS 坐標)
-        ↓
-③ 中央協同規劃代理人 (動態 TDEE 代謝計算器、狀態特徵編碼 s_t)
-        ↓
-④ 數據檢索與知識庫 (周邊 1km 超商/外食全營養知識庫)
-        ↓
-⑤ 臨床醫學硬約束閘門 (DASH 限鈉 < 700mg、低 GI、避普林、低飽和脂肪)
-        ↓
-⑥ 深度強化學習推薦引擎 (PyTorch DQN: Q(s, a) + 多目標加權排序)
-        ↓
-⑦ 決策與臨床可解釋性摘要 (Top-3 實體外食推薦 + 臨床營養依據說明)
-        ↓
-⑧ 呈現與閉環反饋 (Flask Web Cockpit、點選採納/太油即時更新 Q 網路)
-```
+1. **安全與偏好解耦的雙層決策 (Safety-Preference Decoupling)**：
+   - **第一層：確定性臨床與過敏原硬閘門 ([`src/clinical_rules.py`](src/clinical_rules.py))** — 依據 **2025 AHA/ACC 高血壓指引**（單餐鈉 $\le 700\text{ mg}$、禁油炸）、**ADA 2026 糖尿病照護標準**（禁高 GI、添加糖 $\le 5\text{ g}$）、**2020 ACR 痛風指引**（禁高普林）、**CKD 腎病變規則**（`eGFR < 60` 限鉀磷）及 **衛福部 TFDA 11 類強制過敏原** 進行 100% 零容忍篩選（`CVR = 0.0%`, `AVR = 0.0%`）。當周邊無合規餐點時**絕不放寬醫療規則**，改回報 `NO_COMPLIANT_MEAL` 與定製化點餐減害建議 (`order_tips`)。
+   - **第二層：Google Gemini API 語義與線上偏好排序 ([`src/recommender.py`](src/recommender.py))** — 串接 Google Gemini API 理解使用者自然語言渴望（如「剛運動完想吃清淡高蛋白」），結合線上可解釋口味偏好權重 `w = [清淡健康, 傳統便當, 高蛋白]`、營養契合度與 Haversine 步行距離選出最佳 Top-3。
+2. **具備誤差意識與合理性檢查的穿戴式 IoT 代謝預算 ([`src/iot_pipeline.py`](src/iot_pipeline.py))**：
+   - 實作跨感測器合理性檢查 (`plausibility_check`)，自動識破「手機放車架震動導致步數暴增但心率維持靜止」之偽訊號；以 Mifflin-St Jeor 公式計算 BMR，搭配 `0.65` 活動熱量阻尼係數與單餐 `900 kcal` 上限計算動態 TDEE。
+3. **ChatGPT 風格多輪對談介面與數值接地驗證 ([`app.py`](app.py), [`src/agent.py`](src/agent.py))**：
+   - 支援自然語言多輪對話、8 階段推理軌跡展開 (Reasoning Trace)、內嵌互動式推薦卡片與即時回饋學習，並強制執行 `assert numbers_in(E) == db_values(R)` 數值一致性檢查，徹底杜絕 LLM 營養數值幻覺。
 
 ---
 
-## 📂 專案檔案結構 (Repository Layout)
+## 🚀 快速啟動與驗證 (Quick Start)
 
-```
-FinalProject/
-├── PROPOSAL.md                  # 完整的期末專題提案書 (含 A-F 摘要、緒論、相關文獻、三大深度問題、演算法)
-├── DESIGN.md                    # 系統架構設計文件 (依據課程交接規範維護)
-├── README.md                    # 本專案說明文件
-├── requirements.txt             # 專案依賴套件 (PyTorch, Flask, NumPy 等)
-├── .gitignore                   # Git 忽略配置
-├── app.py                       # 互動式 Web Cockpit 演示伺服器 (Flask + Modern Glassmorphism UI)
-├── data/
-│   ├── sample_health_reports.json # 5 組真實臨床表型資料 (高血壓、糖尿病前期、痛風、健身、久坐學生)
-│   └── meal_catalog.json        # 台灣外食全營養資料庫 (7-11、全家、梁社漢、Subway、健康餐盒等)
-├── src/
-│   ├── agent.py                 # NutriAgent 核心排程代理人
-│   ├── clinical_rules.py        # 臨床營養硬約束閘門 (MNT Rules Engine)
-│   ├── iot_pipeline.py          # Google Fit 物聯網生理訊號串流與動態 TDEE 計算
-│   ├── recommender.py           # PyTorch Deep Q-Network (DQN) 強化學習策略模型
-│   └── spatial_lbs.py           # LBS 地理空間索引與 Haversine 距離檢索
-└── tests/
-    └── test_agent.py            # 自動化測試套件 (臨床零違規、動態代謝縮放、DRL 梯度更新)
-```
-
----
-
-## 🚀 快速開始 (Quick Start)
-
-### 1. 環境需求
-* Python 3.10 以上 (支援 Python 3.10 ~ 3.14)
-* 支援 Windows / macOS / Linux
-
-### 2. 安裝套件依賴
 ```powershell
+# 1. 安裝依賴套件
 pip install -r requirements.txt
-```
 
-### 3. 執行自動化臨床安全與演算法測試
-專案內建完整的單元與整合測試，驗證臨床硬約束零違規與 PyTorch 梯度更新：
-```powershell
+# 2. 執行自動化測試套件 (9/9 全數通過)
 python -m unittest tests/test_agent.py
-```
-*預期輸出：*
-```
-.....
-----------------------------------------------------------------------
-Ran 5 tests in 2.3s
 
-OK
-```
+# 3. 執行客觀 KPI 基準評測 (CVR=0.0%, AVR=0.0%, MAE=114.48 kcal)
+python benchmark.py
 
-### 4. 啟動互動式展示介面 (Interactive Web Cockpit)
-```powershell
+# 4. 執行命令列多輪對談示範
+python demo_run.py
+
+# 5. 啟動 ChatGPT 風格對談式網頁伺服器
 python app.py
+# 請開啟瀏覽器前往 http://127.0.0.1:5000
 ```
-在瀏覽器開啟 **`http://127.0.0.1:5000`**，即可體驗：
-1. **切換健檢報告**：觀察高血壓第一期、糖尿病前期或痛風患者之紅字指標。
-2. **切換 Google Fit 活動量**：切換久坐 (~1,850步) 與高強度訓練 (~14,200步)，觀察動態 TDEE 與當餐配額即時縮放。
-3. **執行推薦**：系統自動於周邊 1km 內篩選實體餐點，並展示「剔除了多少件違規餐點（如高鈉油炸）」。
-4. **即時強化學習反饋**：點擊「✔️ 採納並前往」或「🍳 太油太鹹」，介面底部的 PyTorch 策略權重將立即進行在線梯度反向傳播！
 
 ---
 
-## 🧪 核心模組與演算法對照 (Code Implementation Mapping)
+## 📚 專題核心文件導覽
 
-| 提案規範章節 | 對應實作檔案 | 核心類別 / 函數 | 說明 |
-| :--- | :--- | :--- | :--- |
-| **IoT 動態代謝計算** | `src/iot_pipeline.py` | `IoTPipeline.calculate_dynamic_budget()` | 結合 Harris-Benedict 與穿戴安全阻尼係數 ($\alpha=0.65$) |
-| **臨床硬約束閘門** | `src/clinical_rules.py` | `ClinicalRulesEngine.evaluate_meal_safety()` | 嚴格過濾高血壓限鈉、高血糖低 GI、痛風避普林 |
-| **LBS 空間檢索** | `src/spatial_lbs.py` | `SpatialLBSEngine.retrieve_nearby_meals()` | Haversine 地球大圓弧距離與步行時間預估 |
-| **PyTorch 深度強化學習** | `src/recommender.py` | `NutriQNetwork`, `DRLRecommender` | 8維狀態+6維動作輸入，LeakyReLU MLP 預測 Q 值 |
-| **中央代理人協同** | `src/agent.py` | `NutriAgent.run_recommendation()` | 串連 ①-⑧ 端到端管線，生成臨床解釋理由 |
-| **即時線上閉環** | `src/agent.py` | `NutriAgent.handle_user_feedback()` | 使用者反饋驅動在線經驗回放與單步 SGD 更新 |
-
----
-
-## 📄 交付文件導覽 (Deliverables)
-
-1. **[PROPOSAL.md](PROPOSAL.md)**：包含課程要求之完整提案內容（六段式 Abstract、A-F 緒論、文獻表、五大思維模式、三大爭論、十大深度問題、帶行號 Pseudocode）。
-2. **[DESIGN.md](DESIGN.md)**：包含完整系統架構、元件依賴、資料 Schema、演算法公式與評估規範。
-3. **[tests/test_agent.py](tests/test_agent.py)**：可重現的自動化測試套件。
-
----
-
-## 👨‍💻 作者與版權說明
-本專案為「物聯網應用與資料分析」期末專案成果，採用 MIT 授權條款開源發布。
+* **[`NutriAgent_Proposal.docx`](NutriAgent_Proposal.docx)** / **[`PROPOSAL.md`](PROPOSAL.md)**：完整期末專題提案書（含文獻回顧、三大核心深度探討、系統架構圖、流程圖與 Algorithm 1–3 Pseudocode）。
+* **[`DESIGN.md`](DESIGN.md)**：v2.0 系統架構與模組規格說明書。
+* **[`AGENTS.md`](AGENTS.md)**：AI 代理人協同開發憲章（含不變量鐵則、OpenSpec 流程與後續 Track 1–4 優化路線圖）。
+* **[`HANDOVER.md`](HANDOVER.md)**：跨電腦環境架設、Gemini API Key 配置與擴充教學指南。
