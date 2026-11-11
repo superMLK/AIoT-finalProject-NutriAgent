@@ -13,6 +13,14 @@
 
 ---
 
+## 🖥️ 系統畫面 (Screenshot)
+
+![NutriAgent 對話式外食決策介面](docs/images/nutriagent_chat_ui.png)
+
+> 左側欄設定 Gemini API、健檢檔案與 TFDA 11 類過敏原；上方即時顯示動態 TDEE、當餐預算、安全候選池與剔除數；中央以自然語言對話取得推薦，並可展開 Agent 推理軌跡。
+
+---
+
 ## 📌 專題核心架構與創新 (Key Innovations)
 
 1. **安全與偏好解耦的雙層決策 (Safety-Preference Decoupling)**：
